@@ -61,7 +61,13 @@ Production-ready, battle-tested terminal setup featuring **Zellij** multiplexer,
 
 ## 🛠️ Auto-Update & Maintenance
 
-* **Manual Update Command**:
+* **Automatic Repo Sync on Shell Launch**:
+  Whenever you launch your terminal shell, `~/.dotfiles/bin/dotfiles-sync.sh` checks GitHub for updates, pulls changes, and refreshes your symlinks.
+* **Manual Dotfiles Sync Command**:
+  ```bash
+  sync-dotfiles
+  ```
+* **Manual Zellij Binary Update Command**:
   ```bash
   update-zellij
   ```

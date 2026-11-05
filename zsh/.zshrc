@@ -38,7 +38,7 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 # ==============================================================================
-# Zellij Aliases & Helpers
+# Zellij & Dotfiles Aliases
 # ==============================================================================
 alias zj="zellij"
 alias zja="zellij attach -c"
@@ -46,9 +46,10 @@ alias zjl="zellij list-sessions"
 alias zjk="zellij kill-session"
 alias zjka="zellij kill-all-sessions"
 alias update-zellij="${HOME}/.dotfiles/bin/zellij-autoupdate.sh"
+alias sync-dotfiles="${HOME}/.dotfiles/bin/dotfiles-sync.sh --force"
 
 # ==============================================================================
-# Zellij Auto-Launch on Shell Startup
+# Auto-Update Settings from Repo & Auto-Launch Zellij on First Shell Launch
 # ==============================================================================
 # Guards:
 # 1. Terminal is interactive and connected to a TTY (-t 1 and $- == *i*)
@@ -56,5 +57,10 @@ alias update-zellij="${HOME}/.dotfiles/bin/zellij-autoupdate.sh"
 # 3. Not inside an IDE integrated terminal (VS Code, Cursor, Antigravity)
 # 4. Allows bypassing via `ZELLIJ_SKIP=1 zsh` or `NO_ZELLIJ=1`
 if [[ -z "$ZELLIJ" && -z "$NO_ZELLIJ" && -z "$ZELLIJ_SKIP" && -z "$INTELLIJ_ENVIRONMENT_READER" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "cursor" && "$TERM_PROGRAM" != "antigravity" && -t 1 && $- == *i* ]]; then
+    # Sync settings from GitHub repo on first launch of the terminal
+    if [[ -x "${HOME}/.dotfiles/bin/dotfiles-sync.sh" ]]; then
+        "${HOME}/.dotfiles/bin/dotfiles-sync.sh"
+    fi
+
     exec zellij attach -c main
 fi

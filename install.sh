@@ -29,8 +29,8 @@ ln -sf "${DOTFILES_DIR}/zsh/.zshrc" "${HOME}/.zshrc"
 echo "✔ Symlinked ~/.zshrc"
 
 # 3. Permissions & Scripts
-chmod +x "${DOTFILES_DIR}/bin/zellij-autoupdate.sh"
-echo "✔ Permissions verified on bin scripts"
+chmod +x "${DOTFILES_DIR}/bin/"*.sh "${DOTFILES_DIR}/"*.sh 2>/dev/null || true
+echo "✔ Permissions verified on bin and sync scripts"
 
 # 4. Auto-update LaunchAgent setup
 if [ -f "${HOME}/Library/LaunchAgents/com.raj.zellij-autoupdate.plist" ]; then
